@@ -2,7 +2,7 @@
 
 DESCRIPTION
 
-A beta version of the SageMath package for computing signature Gröbner bases in the free algebra.
+A beta version of the SageMath package SignatureGB for computing signature Gröbner bases in the free algebra.
 
 LICENCSE
 
