@@ -26,9 +26,11 @@ it needs to be compiled before it can be used. This can be done by running the c
 
 sage setup.py build_ext --inplace
 
-in the folder SignatureGB.
+inside the folder SignatureGB.
 
+USAGE
 
+Information on how to use the package will be provided here soon together with the first actual release.
 
 
 
