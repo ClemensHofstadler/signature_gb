@@ -32,6 +32,8 @@ USAGE
 
 Information on how to use the package will be provided here soon together with the first actual release.
 
+Note: The benchmark examples included in the papers *Short proofs of ideal membership* and *Signature Gröbner bases in the free algebras over rings* can be run using this beta version. For further information, we refer to the respective README files that come together with the benchmark examples.
+
 
 
 
