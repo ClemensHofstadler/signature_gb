@@ -23,7 +23,7 @@ from cython_modules.ambiguity cimport Ambiguity
 ############################################################################
 cdef class Algorithm:
     cdef public:
-        object syz_automaton, lm_automaton, suffix_trie
+        object syz_automaton, lm_automaton, suffix_trie, order
         list gens, G, H, labGB, F5_rules, degs_gens, quotient
         Py_ssize_t maxiter, maxdeg, count_interval
         Sig sig_bound

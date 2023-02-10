@@ -101,7 +101,7 @@ cdef bint F5_order(Sig s, Sig t):
     s_len = s._len + global_data.weight[ei]
     t_len = t._len + global_data.weight[ej]
         
-    if s_len != t_len: return s._len < t._len
+    if s_len != t_len: return s_len < t_len
       
     if ei != ej: return ei < ej  
     

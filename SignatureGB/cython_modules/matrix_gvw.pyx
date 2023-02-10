@@ -61,24 +61,25 @@ cdef class Matrix_GVW(Algorithm):
         count = 1
         sig_bound = self.sig_bound
         oldlen = len(self.quotient)
+        
+        reductions = 0
+        zero_red = 0
                 
         while count <= self.maxiter and len(pairs) > 0:
                        
-            # sort critical pairs
-            pairs.sort(key = lambda p : p._sig._len)
-                        
-            # select pairs
-            d = pairs[0]._sig._len
-            P = [p for p in pairs if p._sig._len == d]
-            pairs = pairs[len(P):]
-                                                                                
+            P,pairs = self.select_pairs(pairs)
+                                                                   
             # apply criteria
             P = self.criteria(P)
 
             if P:
+                reductions += len(P)
                                         
                 # reduce pairs         
                 new_poly,new_syz = self.reduction_matrix(P)
+                
+                P_sigs = {p._sig for p in P}
+                zero_red += sum(1 for s in new_syz if s in P_sigs)
                                                                                                                                                                                                                                                       
                 self.update_poly_data(new_poly)
                 self.update_syz_data(new_syz)
@@ -103,6 +104,9 @@ cdef class Matrix_GVW(Algorithm):
             print("All critical pairs were reduced to 0.")
         
         self.H = list(set(self.H))
+
+        print("Reductions = %d" % reductions)
+        print("Reductions to 0 = %d" % zero_red)
                  
         return self.G, self.H
 ############################################################################
@@ -315,6 +319,20 @@ cdef class Matrix_GVW(Algorithm):
 # Additional stuff
 ############################################################################
 ############################################################################ 
+    def select_pairs(self,pairs):
+        if self.order == 'F5':
+            pairs.sort(key = lambda p : p._sig)
+            d = pairs[0]._sig._len + self.degs_gens[pairs[0]._sig._ei]
+            P = [p for p in pairs if p._sig._len + self.degs_gens[p._sig._ei] == d]
+            pairs = pairs[len(P):]
+        else:
+            pairs.sort(key = lambda p : p._sig._len)
+            d = pairs[0]._sig._len
+            P = [p for p in pairs if p._sig._len == d]
+            pairs = pairs[len(P):]
+        
+        return P,pairs 
+############################################################################     
     cdef void update_poly_data(Matrix_GVW self, list P):
         cdef SigPoly p
         cdef str mon

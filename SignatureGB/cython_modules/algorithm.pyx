@@ -36,6 +36,7 @@ cdef class Algorithm:
         
         self.gens = M.gens
         self.quotient = quotient
+        self.order = M._signature_order
         
         self.G = M.G
         self.H = M.H
