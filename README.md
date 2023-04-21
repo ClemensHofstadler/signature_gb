@@ -40,7 +40,7 @@ Make sure the path to the folder SignatureGB is visible to SageMath, for example
 ```
   sys.path.append(PATH)
 ```
-where PATH is the path to the directory in which the folder *SignatureGB* is.
+where PATH is the path to the directory in which the folder SignatureGB is.
 
 Then the package can be loaded by calling
 ```
