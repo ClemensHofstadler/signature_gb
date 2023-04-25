@@ -13,6 +13,7 @@ from sage.rings.rational cimport Rational
 from sage.structure.element cimport Vector
 
 
+from cython_modules.sig cimport Sig
 from cython_modules.linear_algebra cimport *
 from cython_modules.orderings cimport *
 
@@ -52,6 +53,10 @@ cdef class Algorithm:
         self.maxiter = maxiter
         self.maxdeg = maxdeg
         self.count_interval = count_interval
+        if sig_bound in ZZ:
+            x = global_data.vars_[0]
+            sig_bound -= min(len(f.lm()._mon) for f in M.gens)
+            sig_bound = Sig('',1,x*sig_bound)
         self.sig_bound = sig_bound
 ############################################################################
     def compute_basis(self): return self.c_compute_basis() 
