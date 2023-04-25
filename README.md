@@ -59,17 +59,10 @@ Furthermore, variable names are restricted to single (lower- and uppercase) char
 ```
 The second argument provides the monomial order w.r.t. which the computations will be exectued.
 A list $[x_1,x_2,\dots, x_n]$ yields a degree-lexicographic ordering $x_1 < x_2 < \dots x_n$.
-Similarly, a nested list $[[x_1,\dots,x_{n_1}],[y_1,\dots,y_{n_2}],\dots,[z_1,\dots,z_{n_k}]]$ yields a block ordering
-$x_1 < \dots x_{n_1} \ll y_1 < \dots y_{n_2} \ll \dots \ll z_1 < \dots < z_{n_k}$, where each block is ordered degree-lexicographically.
-For example
-```
-  LabelledModule(gens,[[a,b],[c,d]])
-```
-yields a LabelledModule with monomial order $a < b \ll c < d$.
 By default, the signature ordering is degree-over-position-over-term (dpot).
 It can be changed to degree-over-term-over-position (dtop) as follows.
 ```
-  LabelledModule(gens,[[a,b],[c,d]],signature_order='dtop')
+  LabelledModule(gens,[a,b,c,d],signature_order='dtop')
 ```
 
 The main functionality provided by a LabelledModule is computing signature and labelled Gröbner bases.
@@ -94,7 +87,7 @@ To reconstruct a (partial) labelled Gröbner basis and a (partial) basis of the 
   H2 = M.reconstruct_syzygies()
 ```
 
-One a labelled Gröbner basis is reconstructed, a LabelledModule also provides the possibility to test ideal membership of noncommutative polynomials.
+Once a labelled Gröbner basis is reconstructed, a LabelledModule also provides the possibility to test ideal membership of noncommutative polynomials.
 If an ideal membership can be verified, it outputs a cofactor representation.
 ```
   F.<a,b,c,d,e> = FreeAlgebra(QQ)
