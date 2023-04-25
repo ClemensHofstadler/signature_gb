@@ -34,6 +34,13 @@ cdef class LabelledPoly(SigPoly):
     def __len__(self):
         return len(self._module_mons)
 ############################################################################
+    def __eq__(self,other):
+        return super().__eq__(other) and self._module_mons == other._module_mons \
+				and self._module_coeffs == other._module_coeffs
+############################################################################
+    def __hash__(self):
+        return super().__hash__()
+############################################################################
     cpdef LabelledPoly copy(LabelledPoly self):
         return LabelledPoly(self._poly.copy(), self._sig.copy(), self._pseudo_sig.copy(), self._module_mons, self._module_coeffs)
 ############################################################################
