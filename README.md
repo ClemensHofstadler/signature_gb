@@ -13,6 +13,8 @@ Distributed under the terms of the GNU General Public License, either version 2 
 
 - SageMath 9.1 or later
 
+## DEPENDENCIES
+
 - The Python library pyahocorasick (https://pyahocorasick.readthedocs.io/en/latest/)
 
 ## INSTALLATION
