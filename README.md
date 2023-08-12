@@ -1,8 +1,8 @@
-# SignatureGB_SageMath
+# siganture_gb
 
 ## DESCRIPTION
 
-A beta version of the SageMath package SignatureGB for computing signature Gröbner bases in the free algebra.
+A beta version of the SageMath package siganture_gb for computing signature Gröbner bases in the free algebra.
 An actual release with documentation, user guide and examples will be coming soon.
 
 ## LICENCSE
