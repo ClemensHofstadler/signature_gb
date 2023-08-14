@@ -2,7 +2,7 @@
 
 ## DESCRIPTION
 
-A beta version of the SageMath package siganture_gb for computing signature Gröbner bases in the free algebra.
+A beta version of the SageMath package signature_gb for computing signature Gröbner bases in the free algebra.
 An actual release with documentation, user guide and examples will be coming soon.
 
 ## LICENCSE
@@ -23,12 +23,12 @@ Download the source code from this page.
 
 Then install the Python library pyahocorasick as decribed [here](https://pyahocorasick.readthedocs.io/en/latest/).
 
-After this, the SignatureGB package can be installed. As this package is written mostly in Cython,
+After this, the signature_gb package can be installed. As this package is written mostly in Cython,
 it needs to be compiled before it can be used. This can be done by running the command
 ```
 sage setup.py build_ext --inplace
 ```
-inside the folder SignatureGB.
+inside the folder signature_gb.
 
 ## USAGE
 
@@ -38,15 +38,15 @@ Note: The benchmark examples included in the papers *Short proofs of ideal membe
 
 In the following, we describe some basic functionality.
 
-Make sure the path to the folder SignatureGB is visible to SageMath, for example, by running
+Make sure the path to the folder signature_gb is visible to SageMath, for example, by running
 ```
   sys.path.append(PATH)
 ```
-where PATH is the path to the directory in which the folder SignatureGB is.
+where PATH is the path to the directory in which the folder signature_gb is.
 
 Then the package can be loaded by calling
 ```
-  from SignatureGB import *
+  from signature_gb import *
 ```
 The basic data strcuture provided by the package is that of a *LabelledModule*.
 It can be constructed from a list of SageMath noncommutative polynomials as follows.
