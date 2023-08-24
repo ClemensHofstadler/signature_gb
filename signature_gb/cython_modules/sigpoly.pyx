@@ -22,7 +22,7 @@ cdef class SigPoly:
         return SigPoly(self._poly.copy(),self._sig.copy())
 ############################################################################    
     def __repr__(self):
-        return 'poly: ' + repr(self._poly) + 'sig : ' + repr(self._sig) + '\n'
+        return 'poly: ' + repr(self._poly) + ' sig : ' + repr(self._sig) + '\n'
 ############################################################################
     cdef bool __ceq__(SigPoly self, SigPoly other):
         return self._poly == other._poly and self._sig == other._sig
