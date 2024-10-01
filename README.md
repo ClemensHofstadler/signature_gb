@@ -72,71 +72,74 @@ built.
 
 ## USAGE
 
-More information on how to use the package will be provided here soon together with the first actual release.
-
-Note: The benchmark examples included in the papers *Short proofs of ideal membership* and *Signature Gröbner bases in the free algebras over rings* can be run using this beta version. For further information, we refer to the respective README files that come together with the benchmark examples.
+An actual documentation on how to use the package will be provided here soon.
 
 In the following, we describe some basic functionality.
 
-Make sure the path to the folder signature_gb is visible to SageMath, for example, by running
-```
-  sys.path.append(PATH)
-```
-where PATH is the path to the directory in which the folder signature_gb is.
-
-Then the package can be loaded by calling
+After installing the package as described above, its functionality can be 
+imported into a Sage session as follows
 ```
   from signature_gb import *
 ```
-The basic data strcuture provided by the package is that of a *LabelledModule*.
+The basic data strcuture provided by the package is that of a `LabelledModule`.
 It can be constructed from a list of SageMath noncommutative polynomials as follows.
 
 *Remark*: So far, only polynomials with rational coefficients are supported.
-Furthermore, variable names are restricted to single (lower- and uppercase) characters.
 
 ```
   F.<a,b,c,d> = FreeAlgebra(QQ)
   gens = [a*b*a-a, b*a*b-b, a*b-c*d, b*a-d*c, c*d*c-c, d*c*d-d]
-  M = LabelledModule(gens,[a,b,c,d])
+  M = LabelledModule(gens)
 ```
-The second argument provides the monomial order w.r.t. which the computations will be exectued.
-A list $[x_1,x_2,\dots, x_n]$ yields a degree-lexicographic ordering $x_1 < x_2 < \dots x_n$.
-By default, the signature ordering is degree-over-position-over-term (dpot).
-It can be changed to degree-over-term-over-position (dtop) as follows.
+A labelled module comes together with a monomial ordering and a module ordering for the signature-based
+computations. By default, the monomial ordering is inherited from the parent of the generators, i.e.,
+from the free algebra. The default module ordering is degree-over-position-over-term (dpot).
+
+To change the monomial ordering, an optional argument `monomial_order` can be provided.
+This argument can be set to a list of variables `monomial_order = [x1,x2,...,xn]`, 
+which yields a degree-lexicographic ordering $x_1 < x_2 < \dots x_n$.
 ```
-  LabelledModule(gens,[a,b,c,d],signature_order='dtop')
+  LabelledModule(gens, monomial_order=[d,c,b,a])
+```
+It can also be set to a list of list of variables `monomial_order = [[x1,...,xk],...,[y1,...,yl]]$,
+which yields a block-ordering $x_1 < \dots x_k \ll \dots \ll y_1 < \dots < y_l$ (each block is compared with a degree-lexicographic ordering).
+```
+  LabelledModule(gens, monomial_order=[[a,b],[c,d]])
+```
+To change the module ordering, the optional argument `signature_order` can be used.
+By default, this is set to `signature_order = 'dpot'`. It can be changed to a 
+degree-over-term-over-position (dtop) as follows
+```
+  LabelledModule(gens, monomial_order=[[a,b],[c,d]], signature_order='dtop')
 ```
 
-The main functionality provided by a LabelledModule is computing signature and labelled Gröbner bases.
-A signature Gröbner basis of a LabelledModule can be enumerated as follows.
-```
-  M = LabelledModule(gens,[a,b,c,d])
-  G, H = M.signature_GB(100)
-```
-This runs 100 iterations of a signature-based algorithm and outputs a (partial) signature Gröbner basis *G* and a (partial) basis *H* of the leading term module of the syzgy module.
-To compute a signature basis up to some fixed signature, a *sig_bound* can be provided in form of a positive integer $N$.
-Then the algorithm computes a signature basis up to degree $N$ (if the number of iterations is chosen large enough).
+The main functionality provided by a `LabelledModule` is computing signature Gröbner bases.
+A signature Gröbner basis of a `LabelledModule` can be enumerated via the method `signature_basis`.
+The following optional arguments can be provided to this method:
+- `maxiter` (default: `10`): The maximal number of iterations of a signature-based Gröbner basis algorithm
+- `maxdeg` (default: `-1`): The maximal degree of ambiguities that are considered during the computation.
+  The default value `-1` causes all ambiguities to be considered.
+- `sig_bound` (default: `-1`): The maximal degree of signatures that are considered during the computation.
+  The default value `-1` causes all signatures to be considered.
+- `verbose` (default: `0`): Determines how much information about the computational progress is displayed.
+  The higher the value, the more information is printed.
 
+So, for example, the commands
 ```
-  M = LabelledModule(gens,[a,b,c,d])
-  G, H = M.signature_GB(100,sig_bound=3)
+  G, H = M.signature_GB(maxiter=100,sig_bound=3)
 ```
-To reconstruct a (partial) labelled Gröbner basis and a (partial) basis of the syzygy module, run the following commands in the given order.
+runs at most 100 iterations of a signature-based Gröbner basis algorithm and outputs a signature Gröbner basis
+`G` up to degree 3 (i.e., the result is a signature Gröbner basis up to the smallest signature with degree 3)
+as well as a (partial) basis `H` of the leading term module of the syzgy module.
 
-```
-  G,H = M.signature_GB(100)
-  G2 = M.reconstruct_labelled_basis()
-  H2 = M.reconstruct_syzygies()
-```
-
-Once a labelled Gröbner basis is reconstructed, a LabelledModule also provides the possibility to test ideal membership of noncommutative polynomials.
-If an ideal membership can be verified, it outputs a cofactor representation.
-```
-  F.<a,b,c,d,e> = FreeAlgebra(QQ)
-  gens = [1-a*b,1-b*a,a*e*a-a, e*a*e-e, a*e-c*d, e*a-d*c, c*d*c-c, d*c*d-d]
-  M = LabelledModule(gens,[a,b,c,d,e])
-  G,H = M.signature_GB(100)
-  M.reconstruct_labelled_basis()
-  M.membership_test(b - e)
-```
-
+The package also provides a modular algorithm for computing signature Gröbner bases.
+It can be called via the method `modular_signature_basis`, which takes the following optional arguments:
+- all optional arguments that can also be given to `signature_gb` with the same meaning.
+- `threads` (default: `None`): Number of threads to be used for the parallel computations. If the default value
+  `None` is used, as many threads will be used as the method `os.cpu_coun()` returns.
+- `num_primes` (default: `None`): Number of primes to be used before the first reconstruction attempt.
+  If the default value `None` is used, `num_primes` is set to the maximimum of 8 and `threads`.
+  If `num_primes` is not enough to reconstruct a basis, this value is increased by `threads` until a successful reconstruction is possible.
+- `verification` (default: `'rigorous'`): Sets the verification procedure. By default, a rigouros verification over the rational number is done.
+  If set to `'probabilistic'`, a verification in positive characteristic is done, which is usually faster but only yields the correct result with
+  high probability. If set to any other value, no verification is performed at all.
