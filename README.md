@@ -91,7 +91,7 @@ It can be constructed from a list of SageMath noncommutative polynomials as foll
   gens = [a*b*a-a, b*a*b-b, a*b-c*d, b*a-d*c, c*d*c-c, d*c*d-d]
   M = LabelledModule(gens)
 ```
-A labelled module comes together with a monomial ordering and a module ordering for the signature-based
+A `LabelledModule` comes together with a monomial ordering and a module ordering for the signature-based
 computations. By default, the monomial ordering is inherited from the parent of the generators, i.e.,
 from the free algebra. The default module ordering is degree-over-position-over-term (dpot).
 
