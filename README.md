@@ -2,8 +2,7 @@
 
 ## DESCRIPTION
 
-A beta version of the SageMath package signature_gb for computing signature Gröbner bases in the free algebra.
-An actual release with documentation, user guide and examples will be coming soon.
+SageMath package for signature-based Gröbner basis computations in the free algebra.
 
 ## LICENCSE
 
@@ -11,24 +10,65 @@ Distributed under the terms of the GNU General Public License, either version 2 
 
 ## REQUIREMENTS
 
-- SageMath 9.1 or later
+- SageMath 9.3 or later is recommended
 
 ## DEPENDENCIES
 
-- The Python library pyahocorasick (https://pyahocorasick.readthedocs.io/en/latest/)
+- The Python library `pyahocorasick` (https://pyahocorasick.readthedocs.io/en/latest/).
+  Will be installed automatically when `signature_gb` is installed as described below.
+  
 
 ## INSTALLATION
 
-Download the source code from this page.
+# With SageMath built from source of binaries from sagemath.org
 
-Then install the Python library pyahocorasick as decribed [here](https://pyahocorasick.readthedocs.io/en/latest/).
+**Note**: This way of installing the package also automatically installs the `pyahocorasick` library.
+Thus, except executing the command below, no additional work is required.
 
-After this, the signature_gb package can be installed. As this package is written mostly in Cython,
-it needs to be compiled before it can be used. This can be done by running the command
-```
-sage setup.py build_ext --inplace
-```
-inside the folder signature_gb.
+To download and install the latest version on a system where SageMath
+was built from source or installed from official packages, run
+
+    sage -pip install [--user] git+https://github.com/ClemensHofstadler/signature_gb.git
+    
+The optional `--user` flag causes the package to be installed in your `.sage`
+directory instead of the SageMath installation tree.
+
+Alternatively, run (square brackets indicate optional flags)
+
+    sage -pip install [--user] [--editable] .
+
+from the root of a local git checkout. The `--editable` flag causes the
+"installed" version to point to your local checkout, making it easier,
+if you edit the code, to run the modified version. See the pip documentation
+for more installation options.
+
+Microsoft Windows users should run the above commands in a "SageMath shell", see
+
+- https://wiki.sagemath.org/SageWindows
+
+Apple macOS users may need additional steps before they are able to add external
+packages to their Sage installations. See
+
+- https://github.com/3-manifolds/fix_mac_sage/releases
+- https://ask.sagemath.org/question/51130
+
+for more information.
+
+### Using the package without installation
+
+To use `signature_gb` directly from a git checkout (without installation), run
+
+    AHOCORASICK_BYTES=yes sage -pip install ./pyahocorasick-master
+from the checkout, followed by
+
+    sage -python setup.py build_ext --inplace
+
+After that, add the `src/` directory to your Python `sys.path`.
+
+The package contains compiled (Cython) modules which are automatically built as
+part of the installation procedure. Installation will fail if they cannot be
+built.
+
 
 ## USAGE
 
