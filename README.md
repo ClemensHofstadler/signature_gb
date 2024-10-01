@@ -20,7 +20,7 @@ Distributed under the terms of the GNU General Public License, either version 2 
 
 ## INSTALLATION
 
-# With SageMath built from source of binaries from sagemath.org
+### With SageMath built from source of binaries from sagemath.org
 
 **Note**: This way of installing the package also automatically installs the `pyahocorasick` library.
 Thus, except executing the command below, no additional work is required.
