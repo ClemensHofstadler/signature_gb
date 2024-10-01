@@ -140,6 +140,10 @@ It can be called via the method `modular_signature_basis`, which takes the follo
 - `num_primes` (default: `None`): Number of primes to be used before the first reconstruction attempt.
   If the default value `None` is used, `num_primes` is set to the maximimum of 8 and `threads`.
   If `num_primes` is not enough to reconstruct a basis, this value is increased by `threads` until a successful reconstruction is possible.
-- `verification` (default: `'rigorous'`): Sets the verification procedure. By default, a rigouros verification over the rational number is done.
+- `verification` (default: `'rigorous'`): Sets the verification procedure. By default, a rigouros verification over the rationals is done.
   If set to `'probabilistic'`, a verification in positive characteristic is done, which is usually faster but only yields the correct result with
   high probability. If set to any other value, no verification is performed at all.
+```
+  G,H = M.modular_signature_basis(maxiter=100, threads=4, num_primes=4)
+```
+  
