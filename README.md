@@ -101,8 +101,8 @@ which yields a degree-lexicographic ordering $x_1 < x_2 < \dots x_n$.
 ```
   LabelledModule(gens, monomial_order=[d,c,b,a])
 ```
-It can also be set to a list of list of variables `monomial_order = [[x1,...,xk],...,[y1,...,yl]]$,
-which yields a block-ordering $x_1 < \dots x_k \ll \dots \ll y_1 < \dots < y_l$ (each block is compared with a degree-lexicographic ordering).
+It can also be set to a list of list of variables `monomial_order = [[x1,...,xi],...,[y1,...,yj]]`,
+which yields a block-ordering $x_1 < \dots x_i \ll \dots \ll y_1 < \dots < y_j$ (each block is compared with a degree-lexicographic ordering).
 ```
   LabelledModule(gens, monomial_order=[[a,b],[c,d]])
 ```
