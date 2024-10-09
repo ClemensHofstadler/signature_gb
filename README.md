@@ -93,7 +93,7 @@ It can be constructed from a list of SageMath noncommutative polynomials as foll
 ```
 A `LabelledModule` comes together with a monomial ordering and a module ordering for the signature-based
 computations. By default, the monomial ordering is inherited from the parent of the generators, i.e.,
-from the free algebra. The default module ordering is degree-over-position-over-term (dpot).
+from the free algebra. The default module ordering is degree-over-position-over-term (DoPoT).
 
 To change the monomial ordering, an optional argument `monomial_order` can be provided.
 This argument can be set to a list of variables `monomial_order = [x1,x2,...,xn]`, 
@@ -107,10 +107,10 @@ which yields a block-ordering $x_1 < \dots x_k \ll \dots \ll y_1 < \dots < y_l$ 
   LabelledModule(gens, monomial_order=[[a,b],[c,d]])
 ```
 To change the module ordering, the optional argument `signature_order` can be used.
-By default, this is set to `signature_order = 'dpot'`. It can be changed to a 
-degree-over-term-over-position (dtop) as follows
+By default, this is set to `signature_order = 'DoPoT'`. It can be changed to a 
+degree-over-term-over-position (DoToP) as follows
 ```
-  LabelledModule(gens, monomial_order=[[a,b],[c,d]], signature_order='dtop')
+  LabelledModule(gens, monomial_order=[[a,b],[c,d]], signature_order='DoToP')
 ```
 
 The main functionality provided by a `LabelledModule` is computing signature Gröbner bases.
