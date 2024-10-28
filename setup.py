@@ -34,7 +34,7 @@ def do_cythonize():
                 extra_compile_args=['-std=c11'],
             )],
             aliases = sage.env.cython_aliases(),
-            annotate=True
+#            annotate=True
         )
 
 os.system('AHOCORASICK_BYTES=yes sage -pip install ./pyahocorasick-master')
