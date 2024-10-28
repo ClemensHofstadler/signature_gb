@@ -1,4 +1,4 @@
-# siganture_gb
+# signature_gb
 
 ## DESCRIPTION
 
