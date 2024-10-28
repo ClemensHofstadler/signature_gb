@@ -125,9 +125,9 @@ The following optional arguments can be provided to this method:
 - `verbose` (default: `0`): Determines how much information about the computational progress is displayed.
   The higher the value, the more information is printed.
 
-So, for example, the commands
+So, for example, the command
 ```
-  G, H = M.signature_GB(maxiter=100,sig_bound=3)
+  G, H = M.signature_basis(maxiter=100,sig_bound=3)
 ```
 runs at most 100 iterations of a signature-based Gröbner basis algorithm and outputs a signature Gröbner basis
 `G` up to degree 3 (i.e., the result is a signature Gröbner basis up to the smallest signature with degree 3)
