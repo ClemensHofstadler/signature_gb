@@ -37,6 +37,8 @@ def do_cythonize():
             annotate=True
         )
 
+os.system('AHOCORASICK_BYTES=yes sage -pip install ./pyahocorasick-master')
+
 try:
     from sage.misc.package_dir import cython_namespace_package_support
     with cython_namespace_package_support():
