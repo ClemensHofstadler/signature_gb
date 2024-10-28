@@ -1,11 +1,7 @@
-.PHONY: install install-ahocorasick build clean
+.PHONY: install build clean
 
-install: build install-ahocorasick
+install: build
 	sage -pip install --upgrade .
-
-install-ahocorasick:
-	AHOCORASICK_BYTES=yes \
-	sage -pip install ./pyahocorasick-master
 
 build:
 	sage -python setup.py build_ext --inplace
