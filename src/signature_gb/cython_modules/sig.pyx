@@ -37,12 +37,13 @@ cdef class Sig:
 ############################################################################
     def set_len(self, l): self._len = l
 ############################################################################
-    def __repr__(self): 
-        a = '*'.join([str(c) for c in self._a])
-        b = '*'.join([str(c) for c in self._b])
+    def __repr__(self):
+        T = self._parent.F().translator()
+        a = '*'.join([chr(c) for c in self._a])
+        b = '*'.join([chr(c) for c in self._b])
         if a: a += '*'
-        if b: b = '*' + b
-        return ''.join([a, "e", str(self._ei), b])
+        if b: b = '*' + b        
+        return ''.join([T(a,to_internal=False), "e", str(self._ei), T(b,to_internal=False)])
 ############################################################################
     def __hash__(self): return hash((self._a,self._ei,self._b))
 ############################################################################
