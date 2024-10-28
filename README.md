@@ -56,9 +56,10 @@ for more information.
 
 ### Using the package without installation
 
-To use `signature_gb` directly from a git checkout (without installation), run
+To use `signature_gb` directly from a git checkout (only installing `pyahocorasick` but not `signature_gb`), run
 
     AHOCORASICK_BYTES=yes sage -pip install ./pyahocorasick-master
+    
 from the checkout, followed by
 
     sage -python setup.py build_ext --inplace
