@@ -137,7 +137,7 @@ The package also provides a modular algorithm for computing signature Gröbner b
 It can be called via the method `modular_signature_basis`, which takes the following optional arguments:
 - all optional arguments that can also be given to `signature_gb` with the same meaning.
 - `threads` (default: `None`): Number of threads to be used for the parallel computations. If the default value
-  `None` is used, as many threads will be used as the method `os.cpu_coun()` returns.
+  `None` is used, as many threads will be used as the method `os.cpu_count()` returns.
 - `num_primes` (default: `None`): Number of primes to be used before the first reconstruction attempt.
   If the default value `None` is used, `num_primes` is set to the maximimum of 8 and `threads`.
   If `num_primes` is not enough to reconstruct a basis, this value is increased by `threads` until a successful reconstruction is possible.
