@@ -1,6 +1,6 @@
 In this folder, we provide additional material for the paper
 
-Modular Techniques for Gröbner Bases in Free Algebras
+Modular Algorithms for Computing Gröbner Bases in Free Algebras
 
 by Clemens Hofstadler and Viktor Levandovskyy.
 
