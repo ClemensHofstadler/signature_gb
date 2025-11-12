@@ -147,4 +147,45 @@ It can be called via the method `modular_signature_basis`, which takes the follo
 ```
   G,H = M.modular_signature_basis(maxiter=100, threads=4, num_primes=4)
 ```
-  
+
+## More examples
+
+To compute, for instance, a signature Gröbner basis up to degree 9 for the benchmark `cyclic5` using the modular algorithm, we can proceed as follows:
+
+```
+from signature_gb import *
+
+F = FreeAlgebra(QQ,['v','w','x','y','z'])
+v,w,x,y,z = F.gens()
+gens = [ 
+    v+w+x+y+z,
+    v*w+w*x+x*y+v*z+y*z,
+    v*w*x+w*x*y+v*w*z+v*y*z+x*y*z,
+    v*w*x*y+v*w*x*z+v*w*y*z+v*x*y*z+w*x*y*z,
+    v*w*x*y*z-1,
+    ]
+cyclic5 = LabelledModule(gens)
+G, H = cyclic5.modular_signature_basis(maxiter=100,sig_bound=9,threads=2)
+```
+
+Using more threads and changing the verification to `probabilistic` speeds up the computation:
+```
+G, H = cyclic5.modular_signature_basis(maxiter=100,sig_bound=9,threads=4,verification="probabilistic")
+```
+
+Here is another example using the `P6` benchmark. We use 5 primes before the first reconstruction attempt.
+```
+from signature_gb import *
+
+F = FreeAlgebra(QQ,['a','b','c'])
+a,b,c = F.gens()
+gens = [
+    c*c*c + 2*c*c*b + 3*c*c*a + 5*b*c*c + 7*a*c*a, 
+    b*c*c + 11*b*a*b + 13*a*a*a
+    ]
+P6 = LabelledModule(gens)
+G, H = P6.modular_signature_basis(maxiter=50,sig_bound=10, num_primes=5, verbose=1)
+```
+The option `verbose=1` prints some information about the computational progress (in particular, it shows that 5 primes are not sufficient to correctly reconstruct the signature basis)
+
+
